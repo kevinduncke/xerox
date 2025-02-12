@@ -1,0 +1,7 @@
+{
+  "name": "Xerox",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
