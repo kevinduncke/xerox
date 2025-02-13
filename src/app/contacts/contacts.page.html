@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Contacts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input [(ngModel)]="name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Phone</ion-label>
+    <ion-input [(ngModel)]="phone"></ion-input>
+  </ion-item>
+
+  <!-- BUTTON TO ADD A CONTACT -->
+  <ion-button expand="full" (click)="addContact()">Add Contact</ion-button>
+
+  <!-- LIST OF CONTACTS -->
+   <ion-list>
+    <ion-item *ngFor="let contact of contacts">
+      <ion-label>
+        <h2>{{ contact.name }}</h2>
+        <p>{{ contact.phone }}</p>
+      </ion-label>
+      <ion-button (click)="deleteContact(contact.id)" color="danger" slot="end">Delete</ion-button>
+    </ion-item>
+   </ion-list>
+</ion-content>
