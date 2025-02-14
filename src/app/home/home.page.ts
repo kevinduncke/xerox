@@ -1,12 +1,22 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { IonicModule, NavController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  // IonItem,
+  IonLabel,
+  // IonInput,
+  IonButton,
+  IonFooter,
+  IonGrid,
+  IonCol,
+  IonRow
 } from '@ionic/angular/standalone';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +24,31 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    // IonItem,
+    IonLabel,
+    // IonInput,
+    IonButton,
+    IonFooter,
+    CommonModule,
     IonicModule,
     RouterModule,
+    FormsModule,
+    IonGrid,
+    IonCol,
+    IonRow
   ],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private router: Router, private navCtrl: NavController) {}
+
+  // METHOD TO NAVIGATE TO THE CONTACT PAGE
+  navigateToContactPage() {
+    this.navCtrl.navigateForward('/contacts', {
+      animationDirection: 'forward',
+    });
+  }
 }

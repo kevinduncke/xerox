@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import {
   IonContent,
   IonHeader,
   IonTitle,
-  IonToolbar,
+  // IonToolbar,
   IonItem,
   IonLabel,
   IonInput,
+  IonButton,
+  IonFooter,
 } from '@ionic/angular/standalone';
 
-// APP SERVICES
-import { DatabaseService } from '../services/database.service';
+/* XEROX SERVICES */
+import { SqliteService } from '../services/sqlite.service';
 
 @Component({
   selector: 'app-contacts',
@@ -21,56 +24,51 @@ import { DatabaseService } from '../services/database.service';
   styleUrls: ['./contacts.page.scss'],
   standalone: true,
   imports: [
-    IonInput,
-    IonLabel,
-    IonItem,
     IonContent,
     IonHeader,
     IonTitle,
-    IonToolbar,
+    // IonToolbar,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonButton,
+    IonFooter,
     CommonModule,
     IonicModule,
+    RouterModule,
     FormsModule,
   ],
 })
-export class ContactsPage implements OnInit {
-
-  // ARRAY TO STORE CONTACTS
-  contacts: any[] = [];
-
-  // STRING FOR NAME INPUT FIELD
+export class ContactsPage {
+  surname: string = '';
   name: string = '';
-  // STRING FOR PHONE INPUT FIELD
-  phone: string = '';
 
-  constructor(private dbService: DatabaseService) {}
+  constructor(
+    private router: Router, 
+    private sqliteService: SqliteService,
+    private navCtrl: NavController
+  ) {}
 
-  async ngOnInit() {
-    await this.loadContacts();
-  }
-
-  // LOAD CONTACTS FROM DATABASE
-  async loadContacts() {
-    this.contacts = await this.dbService.getContacts();
-  }
-
-  // ADD A CONTACT TO DATABASE
-  async addContact() {
-    if (this.name && this.phone) {
-      await this.dbService.addContact(this.name, this.phone);
-
-      // CLEAR INPUTS
-      this.name = '';
-      this.phone = '';
-
-      // REFRESH CONTACT LIST
-      await this.loadContacts();
+  // SAVE THE CONTACT TO THE DATABASE
+  async saveContact() {
+    if (this.surname && this.name) {
+      try {
+        await this.sqliteService.addContact(this.surname, this.name);
+        this.surname = '';
+        this.name = '';
+        alert('Contact saved successfully!');
+      } catch (error) {
+        alert('Error saving contact:' + error);
+      }
+    } else {
+      alert('Please fill in all fields.');
     }
   }
 
-  // DELETE A CONTACT BY ID
-  async deleteContact(id: number) {
-    await this.dbService.deleteContact(id);
-    await this.loadContacts();
+  // METHOD TO NAVIGATE TO THE HOME PAGE
+  navigateToHomePage() {
+    this.navCtrl.navigateForward('/home', {
+      animationDirection: 'forward',
+    });
   }
 }

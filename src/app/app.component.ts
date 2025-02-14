@@ -2,14 +2,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home/home.page';
-import { ContactsPage } from './contacts/contacts.page';
 
-const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default route
-  { path: 'home', component: HomePage }, // Home page
-  { path: 'contacts', component: ContactsPage }, // Contacts page
-];
+/* XEROX FILES & SERVICES */
+import { SqliteService } from './services/sqlite.service';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +14,17 @@ const routes: Routes = [
   imports: [IonApp, IonRouterOutlet, FormsModule, RouterModule],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private SqliteService: SqliteService) {
+    this.initializeApp();
+  }
+
+  // INITIALIZATION OF DATABASE
+  async initializeApp() {
+    try {
+      await this.SqliteService.initializeDatabase(); // Initialize the database
+      console.log('Database initialized successfully!');
+    } catch (error) {
+      console.error('Error initializing database:', error);
+    }
+  }
 }

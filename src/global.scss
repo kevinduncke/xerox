@@ -34,4 +34,69 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+/* FONT FAMILY | PRIMARY FONT */
+@font-face {
+  font-family: "Roboto Regular";
+  src: url("./assets/fonts/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "Roboto Bold";
+  src: url("./assets/fonts/Roboto-Bold.ttf");
+}
+
+body {
+  background: #101011;
+  box-sizing: border-box !important;
+}
+button:focus {
+  outline: none !important;
+}
+ion-header, ion-footer {
+  margin: 10px 0;
+}
+ion-footer, ion-content,
+ion-toolbar, ion-item {
+  --background: transparent !important;
+}
+.ionHeader {
+  --background: transparent !important;
+  padding: 15px 25px;
+  box-shadow: none;
+  text-align: center;
+}
+.ionFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none !important;
+}
+.ionItem {
+  --border-color: transparent;
+  margin: 15px 20px;
+  border: 2px solid #6D6D6D;
+  border-radius: 10px;
+}
+.ionLabel {
+  color: #d6d4d4!important;
+  font-size: 14px!important;
+}
+.bigButton {
+  background: linear-gradient(to right, rgb(45, 45, 45), rgb(31, 31, 31));
+  --background: transparent;
+  --background-hover: transparent;
+  --box-shadow: none;
+  padding: 15px 0;
+  color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  display: block;
+  margin: 0 20px;
+  box-sizing: border-box;
+}
+.splitButton {
+  width: 100%;
+}
+
+
