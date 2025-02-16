@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -16,7 +16,8 @@ import {
 } from '@ionic/angular/standalone';
 
 /* XEROX SERVICES */
-import { SqliteService } from '../services/sqlite.service';
+import { SqlqueryService } from '../services/sqlquery.service';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-contacts',
@@ -44,24 +45,28 @@ export class ContactsPage {
   name: string = '';
 
   constructor(
-    private router: Router, 
-    private sqliteService: SqliteService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private SQLQueryService: SqlqueryService
   ) {}
 
-  // SAVE THE CONTACT TO THE DATABASE
-  async saveContact() {
-    if (this.surname && this.name) {
-      try {
-        await this.sqliteService.addContact(this.surname, this.name);
-        this.surname = '';
-        this.name = '';
-        alert('Contact saved successfully!');
-      } catch (error) {
-        alert('Error saving contact:' + error);
+  // SQLITE CAPACITOR PLUGIN | CHECKING
+  private isSQLitePluginAvailable(): boolean {
+    return Capacitor.isPluginAvailable('CapacitorSQLite');
+  }
+
+  // ADD THE CONTACT TO THE DATABASE
+  async addContact() {
+    try {
+      if (!this.isSQLitePluginAvailable()) {
+        console.error('Capacitor SQLite Plugin is not available.');
+        alert('Capacitor SQLite Plugin is not available.');
+        return;
       }
-    } else {
-      alert('Please fill in all fields.');
+
+      await this.SQLQueryService.insertData(this.surname, this.name);
+      console.log('Contact added successfully to database.');
+    } catch (error) {
+      console.error('Failed to add contact: ', error);
     }
   }
 

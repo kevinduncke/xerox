@@ -7,13 +7,14 @@
 
 <ion-content>
   <!-- MAIN CONTENT HERE -->
-  <ion-item class="ionItem">
-    <ion-label position="floating" class="ionLabel">Name</ion-label>
-    <ion-input [(ngModel)]="name"></ion-input>
-  </ion-item>
+   
   <ion-item class="ionItem">
     <ion-label position="floating" class="ionLabel">Surname</ion-label>
-    <ion-input [(ngModel)]="surname"></ion-input>
+    <ion-input [(ngModel)]="surname" aria-label="Surname"></ion-input>
+  </ion-item>
+  <ion-item class="ionItem">
+    <ion-label position="floating" class="ionLabel">Name</ion-label>
+    <ion-input [(ngModel)]="name" aria-label="Name"></ion-input>
   </ion-item>
 </ion-content>
 
@@ -22,6 +23,7 @@
     expand="block"
     (click)="navigateToHomePage()"
     class="bigButton splitButton"
+    aria-label="Navigate to Home Page"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -37,8 +39,9 @@
   </ion-button>
   <ion-button
     expand="block"
-    (click)="saveContact()"
+    (click)="addContact()"
     class="bigButton splitButton"
+    aria-label="Save Contact"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
