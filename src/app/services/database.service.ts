@@ -116,7 +116,7 @@ export class DatabaseService {
   }
 
   // RETURNS THE DB INSTANCE
-  getDatabase(): SQLiteDBConnection {
+  get _db(): SQLiteDBConnection {
     if (!this.isDatabaseInitialized) {
       throw new Error('Database is not initialized.');
     }

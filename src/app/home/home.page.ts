@@ -15,7 +15,7 @@ import {
   IonFooter,
   IonGrid,
   IonCol,
-  IonRow,
+  IonRow
 } from '@ionic/angular/standalone';
 
 // XEROX SERVICES AND COMPONENTS
@@ -44,11 +44,10 @@ import { Contact } from '../models/contact.model';
     FormsModule,
     IonGrid,
     IonCol,
-    IonRow,
+    IonRow
   ],
 })
 export class HomePage implements OnInit {
-  //
   // VARIABLE TO STORE CONTACTS DATA FROM DATABASE
   contacts: Array<{ id: number; surname: string; name: string }> = [];
 
@@ -129,10 +128,28 @@ export class HomePage implements OnInit {
         } groups of contacts.`
       );
     } else {
-      console.log('The database has no contacts.');
+      console.log('The database has 0 contacts.');
     }
 
     return result;
+  }
+
+  async deleteContact(id: number) {
+    try {
+      // DELETE THE CONTACT FROM THE DATABASE
+      await this.SqliteQueryService.deleteData(id);
+      console.log('Contact deleted from database.');
+
+      // REMOVE THE CONTACT FROM THE CONTACTS ARRAY
+      this.contacts = this.contacts.filter((contact) => contact.id !== id);
+
+      // RE-GROUP THE CONTACTS
+      this.groupedContacts = this.groupContacts(this.contacts);
+
+      console.log('Contact removed from the UI.');
+    } catch (error) {
+      console.error('Failed to delete contact: ', error);
+    }
   }
 
   // METHOD TO NAVIGATE TO THE CONTACT PAGE

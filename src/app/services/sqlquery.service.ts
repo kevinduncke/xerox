@@ -52,4 +52,31 @@ export class SqlqueryService {
       throw new Error('Failed to SELECT data.');
     }
   }
+
+  // DELETE QUERY DATA TO DATABASE
+  async deleteData(id: number): Promise<void> {
+    // VALIDATE INPUT PARAMETER
+    if (!id || isNaN(Number(id))) {
+      console.error(`Invalid id provided: ${id}, type is ${typeof(id)}.`)
+      throw new Error('Invalid id provided.');
+    }    
+
+    // Check if the db object is available
+    if (!this.databaseService._db) {
+      throw new Error('Database connection is not available.');
+    }
+
+    const query = 'DELETE FROM contacts WHERE id = ?';
+    const params = [id];
+
+    try {
+      // EXECUTE SQL DELETE QUERY
+      const result = await this.databaseService._db.run(query, params);
+      console.log('SQL DELETE Query executed in database successfully.');
+      console.log(`Deleted ${result.changes?.changes} row(s).`)
+    } catch (error) {
+      console.error(`Failed to DELETE data with id ${id}: `, error);
+      throw new Error('Failed to DELETE data.');
+    }
+  }
 }
