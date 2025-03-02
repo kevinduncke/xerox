@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<ion-header class="ionHeader">
+  <ion-toolbar>
+    <ion-title>XEROX</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="12" class="tb-contact-title">
+        <ion-label>{{ contact?.name || "Name" }}, {{ contact?.surname || "Surname" }}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid class="ion-padding">
+    <!-- TABLE HEADER -->                                                                                  
+    <ion-row class="table-header tb-header">
+      <ion-col size="12">Main Information</ion-col>
+    </ion-row>
+
+    <!-- TABLE ROWS -->
+    <ion-row class="tb-subtitle">
+      <ion-col size="4">Contact ID:</ion-col>
+      <ion-col size="8">{{ contact?.id || "#" }}</ion-col>
+    </ion-row>
+    <ion-row class="tb-data">
+      <ion-col size="6">{{ contact?.name || "Name" }}</ion-col>
+      <ion-col size="6">{{ contact?.surname || "Surname" }}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ionFooter">
+  <ion-button
+    expand="block"
+    (click)="navigateToHomePage()"
+    class="bigButton splitButton"
+    aria-label="Navigate to Home Page"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="20"
+      width="17.5"
+      viewBox="0 0 448 512"
+    >
+      <path
+        fill="#ffffff"
+        d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+      />
+    </svg>
+  </ion-button>
+  <ion-button
+    expand="block"
+    class="bigButton splitButton"
+    aria-label="Edit Contact"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="20"
+      width="17.5"
+      viewBox="0 0 640 512"
+    >
+      <path
+        fill="#ffffff"
+        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l293.1 0c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1l-91.4 0zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z"
+      />
+    </svg>
+  </ion-button>
+  <ion-button
+    expand="block"
+    class="bigButton splitButton"
+    aria-label="Delete Contact"
+    (click)="deleteContact(contactId)"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="20"
+      width="17.5"
+      viewBox="0 0 448 512"
+    >
+      <path
+        fill="#ffffff"
+        d="M170.5 51.6L151.5 80l145 0-19-28.4c-1.5-2.2-4-3.6-6.7-3.6l-93.7 0c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80 368 80l48 0 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-8 0 0 304c0 44.2-35.8 80-80 80l-224 0c-44.2 0-80-35.8-80-80l0-304-8 0c-13.3 0-24-10.7-24-24S10.7 80 24 80l8 0 48 0 13.8 0 36.7-55.1C140.9 9.4 158.4 0 177.1 0l93.7 0c18.7 0 36.2 9.4 46.6 24.9zM80 128l0 304c0 17.7 14.3 32 32 32l224 0c17.7 0 32-14.3 32-32l0-304L80 128zm80 64l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0l0 208c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-208c0-8.8 7.2-16 16-16s16 7.2 16 16z"
+      />
+    </svg>
+  </ion-button>
+</ion-footer>

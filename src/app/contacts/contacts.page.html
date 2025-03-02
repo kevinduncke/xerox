@@ -7,15 +7,107 @@
 
 <ion-content>
   <!-- MAIN CONTENT HERE -->
-   
-  <ion-item class="ionItem">
-    <ion-label position="floating" class="ionLabel">Surname</ion-label>
-    <ion-input [(ngModel)]="surname" aria-label="Surname"></ion-input>
-  </ion-item>
-  <ion-item class="ionItem">
-    <ion-label position="floating" class="ionLabel">Name</ion-label>
-    <ion-input [(ngModel)]="name" aria-label="Name"></ion-input>
-  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <!-- BASIC INFORMATION -->
+      <ion-col size="12" class="ctc-title">
+        <ion-label>Main Information</ion-label>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Surname</ion-label>
+          <ion-input [(ngModel)]="surname" aria-label="Surname"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Name</ion-label>
+          <ion-input [(ngModel)]="name" aria-label="Name"></ion-input>
+        </ion-item>
+      </ion-col>
+      <!-- BORN INFORMATION -->
+      <ion-col size="12" class="ctc-title">
+        <ion-label>Born Information</ion-label>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">City</ion-label>
+          <ion-input aria-label="city"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Department</ion-label>
+          <ion-input aria-label="department"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">State</ion-label>
+          <ion-input aria-label="ctate"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Country</ion-label>
+          <ion-input aria-label="country"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Date</ion-label>
+          <ion-input aria-label="date"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Sex</ion-label>
+          <ion-input aria-label="sex"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">D.N.I</ion-label>
+          <ion-input aria-label="dni"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">C.U.I.T</ion-label>
+          <ion-input aria-label="cuit"></ion-input>
+        </ion-item>
+      </ion-col>
+      <!-- FATHER INFORMATION -->
+      <ion-col size="12" class="ctc-title">
+        <ion-label>Father Information</ion-label>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Surname</ion-label>
+          <ion-input aria-label="Surname"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Name</ion-label>
+          <ion-input aria-label="Name"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">D.N.I</ion-label>
+          <ion-input aria-label="dni"></ion-input>
+        </ion-item>  
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">C.U.I.T</ion-label>
+          <ion-input aria-label="cuit"></ion-input>
+        </ion-item>    
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Nationality</ion-label>
+          <ion-input aria-label="nationality"></ion-input>
+        </ion-item>                   
+      </ion-col>
+      <!-- MOTHER INFORMATION -->
+      <ion-col size="12" class="ctc-title">
+        <ion-label>Mother Information</ion-label>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Surname</ion-label>
+          <ion-input aria-label="Surname"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Name</ion-label>
+          <ion-input aria-label="Name"></ion-input>
+        </ion-item>
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">D.N.I</ion-label>
+          <ion-input aria-label="dni"></ion-input>
+        </ion-item>  
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">C.U.I.T</ion-label>
+          <ion-input aria-label="cuit"></ion-input>
+        </ion-item>    
+        <ion-item class="ionItem">
+          <ion-label position="floating" class="ionLabel">Nationality</ion-label>
+          <ion-input aria-label="nationality"></ion-input>
+        </ion-item>                   
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
 
 <ion-footer class="ionFooter">

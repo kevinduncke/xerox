@@ -1,5 +1,16 @@
 ion-footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   margin-bottom: 35px;
+}
+ion-grid {
+  margin: 0 15px;
+}
+.ctc-title {
+  font-family: 'Roboto Bold';
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+.ionItem {
+  margin: 25px 0 15px 0;
 }

@@ -15,7 +15,7 @@ import {
   IonFooter,
   IonGrid,
   IonCol,
-  IonRow
+  IonRow,
 } from '@ionic/angular/standalone';
 
 // XEROX SERVICES AND COMPONENTS
@@ -44,7 +44,7 @@ import { Contact } from '../models/contact.model';
     FormsModule,
     IonGrid,
     IonCol,
-    IonRow
+    IonRow,
   ],
 })
 export class HomePage implements OnInit {
@@ -134,27 +134,17 @@ export class HomePage implements OnInit {
     return result;
   }
 
-  async deleteContact(id: number) {
-    try {
-      // DELETE THE CONTACT FROM THE DATABASE
-      await this.SqliteQueryService.deleteData(id);
-      console.log('Contact deleted from database.');
-
-      // REMOVE THE CONTACT FROM THE CONTACTS ARRAY
-      this.contacts = this.contacts.filter((contact) => contact.id !== id);
-
-      // RE-GROUP THE CONTACTS
-      this.groupedContacts = this.groupContacts(this.contacts);
-
-      console.log('Contact removed from the UI.');
-    } catch (error) {
-      console.error('Failed to delete contact: ', error);
-    }
-  }
-
   // METHOD TO NAVIGATE TO THE CONTACT PAGE
   navigateToContactPage() {
     this.navCtrl.navigateForward('/contacts', {
+      animationDirection: 'forward',
+    });
+  }
+
+  // METHOD TO NAVIGATE TO THE CONTACT DETAILS PAGE
+  navigateToContactDetailsPage(id: number) {
+    console.log(id);
+    this.navCtrl.navigateForward(`/contact-details/${id}`, {
       animationDirection: 'forward',
     });
   }

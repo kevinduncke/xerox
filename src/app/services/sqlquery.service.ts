@@ -57,9 +57,9 @@ export class SqlqueryService {
   async deleteData(id: number): Promise<void> {
     // VALIDATE INPUT PARAMETER
     if (!id || isNaN(Number(id))) {
-      console.error(`Invalid id provided: ${id}, type is ${typeof(id)}.`)
+      console.error(`Invalid id provided: ${id}, type is ${typeof id}.`);
       throw new Error('Invalid id provided.');
-    }    
+    }
 
     // Check if the db object is available
     if (!this.databaseService._db) {
@@ -73,10 +73,33 @@ export class SqlqueryService {
       // EXECUTE SQL DELETE QUERY
       const result = await this.databaseService._db.run(query, params);
       console.log('SQL DELETE Query executed in database successfully.');
-      console.log(`Deleted ${result.changes?.changes} row(s).`)
+      console.log(`Deleted ${result.changes?.changes} row(s).`);
     } catch (error) {
       console.error(`Failed to DELETE data with id ${id}: `, error);
       throw new Error('Failed to DELETE data.');
+    }
+  }
+
+  // GET SPECIFIC CONTACT DETAILS
+  async contactDetails(id: number): Promise<any> {
+    // Check if the db object is available
+    if (!this.databaseService['db']) {
+      throw new Error('Database connection is not available.');
+    }
+
+    const query = 'SELECT id, surname, name FROM contacts WHERE id = ?;';
+    const params = [id];
+
+    try {
+      // EXECUTE SQL SELECT QUERY
+      const result = await this.databaseService['db'].query(query, params);
+      console.log('SQL SELECT Query executed in database successfully.');
+
+      // RETURN ARRAY OF OBJECT DATA OR EMPTY ARRAY
+      return result.values || [];
+    } catch (error) {
+      console.error('Failed to SELECT data: ', error);
+      throw new Error('Failed to SELECT data.');
     }
   }
 }
