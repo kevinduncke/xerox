@@ -41,8 +41,54 @@ import { Capacitor } from '@capacitor/core';
   ],
 })
 export class ContactsPage {
+  // Main Information
   surname: string = '';
   name: string = '';
+  // Born Information
+  born = {
+    city: '',
+    department: '',
+    state: '',
+    country: '',
+    birthDate: '',
+    sex: '',
+    dni: '',
+    cuit: '',
+  };
+  // Father Information
+  father = {
+    surname: '',
+    name: '',
+    dni: '',
+    cuit: '',
+    nationality: '',
+    type: 'father',
+  };
+  // Mother Information
+  mother = {
+    surname: '',
+    name: '',
+    dni: '',
+    cuit: '',
+    nationality: '',
+    type: 'mother',
+  };
+  // National Identification Card
+  nationalId = {
+    surname: '',
+    name: '',
+    sex: '',
+    nationality: '',
+    type: '',
+    birthDate: '',
+    issueDate: '',
+    expiryDate: '',
+    idCode: '',
+    documentNumber: '',
+    address: '',
+    placeOfBirth: '',
+    cuil: '',
+  };
 
   constructor(
     private navCtrl: NavController,
@@ -63,7 +109,15 @@ export class ContactsPage {
         return;
       }
 
-      await this.SQLQueryService.insertData(this.surname, this.name);
+      // await this.SQLQueryService.insertData(this.surname, this.name);
+      await this.SQLQueryService.insertAllData(
+        this.surname,
+        this.name,
+        this.born,
+        this.father,
+        this.mother,
+        this.nationalId
+      );
       console.log('Contact added successfully to database.');
     } catch (error) {
       console.error('Failed to add contact: ', error);

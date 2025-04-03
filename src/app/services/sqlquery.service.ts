@@ -9,19 +9,85 @@ import { DatabaseService } from './database.service';
 export class SqlqueryService {
   constructor(private databaseService: DatabaseService) {}
 
-  // INSERT QUERY DATA TO DATABASE
-  async insertData(surname: string, name: string): Promise<void> {
+  async insertAllData(
+    surname: string,
+    name: string,
+    born: any,
+    father: any,
+    mother: any,
+    national_ids: any
+  ): Promise<void> {
     // Check if the db object is available
     if (!this.databaseService['db']) {
       throw new Error('Database connection is not available.');
     }
 
-    const query = 'INSERT INTO contacts (surname, name) VALUES (?, ?);';
-    const params = [surname, name];
+    const mainQuery = 'INSERT INTO contacts (surname, name) VALUES (?, ?);';
+    const mainParams = [surname, name];
+
+    const bornQuery = `INSERT INTO born (
+      city, department, state, country, birth_date, sex, dni, cuit
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
+    const bornParams = [
+      born.city,
+      born.department,
+      born.state,
+      born.country,
+      born.birthDate,
+      born.sex,
+      born.dni,
+      born.cuit,
+    ];
+
+    const parentsQuery = `INSERT INTO parents (
+      type, surname, name, dni, cuit, nationality
+    ) VALUES (?, ?, ?, ?, ?, ?);`;
+    const fatherParams = [
+      father.type,
+      father.surname,
+      father.name,
+      father.dni,
+      father.cuit,
+      father.nationality,
+    ];
+    const motherParams = [
+      mother.type,
+      mother.surname,
+      mother.name,
+      mother.dni,
+      mother.cuit,
+      mother.nationality,
+    ];
+
+    const nationalIdsQuery = `INSERT INTO national_ids (
+      surname, name, sex, nationality, type, birth_date, 
+      issue_date, expiry_date, id_code, document_number,
+      address, place_of_birth, cuil
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    const nationalIdsParams = [
+      national_ids.surname,
+      national_ids.name,
+      national_ids.sex,
+      national_ids.nationality,
+      national_ids.type,
+      national_ids.birthDate,
+      national_ids.issueDate,
+      national_ids.expiryDate,
+      national_ids.idCode,
+      national_ids.documentNumber,
+      national_ids.address,
+      national_ids.placeOfBirth,
+      national_ids.cuil,
+    ];
 
     try {
       // EXECUTE SQL INSERT QUERY
-      await this.databaseService['db'].run(query, params);
+      // await this.databaseService['db'].run(query, params);
+      await this.databaseService['db'].run(mainQuery, mainParams);
+      await this.databaseService['db'].run(bornQuery, bornParams);
+      await this.databaseService['db'].run(parentsQuery, fatherParams);
+      await this.databaseService['db'].run(parentsQuery, motherParams);
+      await this.databaseService['db'].run(nationalIdsQuery, nationalIdsParams);
       console.log('SQL INSERT Query executed in database successfully.');
     } catch (error) {
       console.error('Failed to INSERT data: ', error);

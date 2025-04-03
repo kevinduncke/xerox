@@ -92,9 +92,54 @@ export class DatabaseService {
         name TEXT NOT NULL
       );
     `;
+    const BORN_TABLE = `
+      CREATE TABLE IF NOT EXISTS born (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        city TEXT NOT NULL,
+        department TEXT NOT NULL,
+        state TEXT NOT NULL,
+        country TEXT NOT NULL,
+        birth_date TEXT NOT NULL,
+        sex TEXT NOT NULL,
+        dni TEXT NOT NULL,
+        cuit TEXT NOT NULL
+      );
+    `;
+    const PARENTS_TABLE = `
+      CREATE TABLE IF NOT EXISTS parents (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        type TEXT NOT NULL,
+        surname TEXT NOT NULL,
+        name TEXT NOT NULL,
+        dni TEXT NOT NULL,
+        cuit TEXT NOT NULL,
+        nationality TEXT NOT NULL
+      );
+    `;    
+    const NATIONAL_IDS_TABLE = `
+      CREATE TABLE IF NOT EXISTS national_ids (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        surname TEXT NOT NULL,
+        name TEXT NOT NULL,
+        sex TEXT NOT NULL,
+        nationality TEXT NOT NULL,
+        type TEXT NOT NULL,
+        birth_date TEXT NOT NULL,
+        issue_date TEXT NOT NULL,
+        expiry_date TEXT NOT NULL,
+        id_code TEXT NOT NULL,
+        document_number TEXT NOT NULL,
+        address TEXT NOT NULL,
+        place_of_birth TEXT NOT NULL,
+        cuil TEXT NOT NULL
+      );
+    `;    
 
     try {
       await this.db.execute(query);
+      await this.db.execute(BORN_TABLE);
+      await this.db.execute(PARENTS_TABLE);
+      await this.db.execute(NATIONAL_IDS_TABLE);
     } catch (error) {
       console.error('Failed to create contacts table', error);
       throw new Error('Failed to create contacts table');
