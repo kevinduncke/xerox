@@ -156,6 +156,7 @@ export class SqlqueryService {
     const query = 'SELECT id, surname, name FROM contacts WHERE id = ?;';
     const params = [id];
 
+
     try {
       // EXECUTE SQL SELECT QUERY
       const result = await this.databaseService['db'].query(query, params);
@@ -163,6 +164,28 @@ export class SqlqueryService {
 
       // RETURN ARRAY OF OBJECT DATA OR EMPTY ARRAY
       return result.values || [];
+    } catch (error) {
+      console.error('Failed to SELECT data: ', error);
+      throw new Error('Failed to SELECT data.');
+    }
+  }
+
+  async bornDetails(id: number): Promise<any> {
+    // Check if the db object is available
+    if (!this.databaseService['db']) {
+      throw new Error('Database connection is not available.');
+    }    
+
+    const queryBorn = 'SELECT id, city, department, state, country, birth_date, sex, dni, cuit FROM born WHERE id = ?;';
+    const paramsBorn = [id];
+    
+    try {
+      // EXECUTE SQL SELECT QUERY
+      const resultBorn = await this.databaseService['db'].query(queryBorn, paramsBorn);
+      console.log('SQL SELECT Query executed in database successfully.');
+
+      // RETURN ARRAY OF OBJECT DATA OR EMPTY ARRAY
+      return resultBorn.values || [];      
     } catch (error) {
       console.error('Failed to SELECT data: ', error);
       throw new Error('Failed to SELECT data.');

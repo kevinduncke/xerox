@@ -20,6 +20,7 @@ import {
 import { SqlqueryService } from '../services/sqlquery.service';
 import { DatabaseService } from '../services/database.service';
 import { Contact } from '../models/contact.model';
+import { BornContact } from '../models/bornContact.model';
 
 @Component({
   selector: 'app-contact-details',
@@ -46,6 +47,7 @@ export class ContactDetailsPage implements OnInit {
 
   // VARIABLE TO STORE CONTACTS DATA FROM DATABASE
   contact: Contact | null = null;
+  born: BornContact | null = null;
   contactId: number = 0;
 
   constructor(
@@ -74,6 +76,7 @@ export class ContactDetailsPage implements OnInit {
 
       // SELECT CONTACT DETAILS FROM DATABASE
       const result = await this.SqliteQueryService.contactDetails(this.contactId)
+      const resultBorn = await this.SqliteQueryService.bornDetails(this.contactId);
       
       // CHECK IF RESULT EXISTS AND ASSIGN TO CONTACT
       if(result && result.length > 0){
@@ -82,9 +85,17 @@ export class ContactDetailsPage implements OnInit {
         console.warn('No contact found with ID: ', this.contactId);
         this.contact = null;
       }
+
+      if(resultBorn && resultBorn.length > 0){
+        this.born = resultBorn[0];
+      } else {
+        console.warn('No contact found with ID: ', this.contactId);
+        this.born = null;
+      }
     } catch (error) {
       console.error('Failed to load contact details:', error);
       this.contact = null; 
+      this.born = null;
     }
   }
 
